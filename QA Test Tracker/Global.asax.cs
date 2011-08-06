@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
+using NHibernate.Tool.hbm2ddl;
 using QA_Test_Tracker.Configuration;
 using QA_Test_Tracker.Controllers;
 using Siege.Repository.NHibernate;
-using Siege.Repository.Web;
+using Siege.Repository.UnitOfWork;
 using Siege.ServiceLocator;
 using Siege.ServiceLocator.Extensions.Conventions;
-using Siege.ServiceLocator.Extensions.ExtendedRegistrationSyntax;
 using Siege.ServiceLocator.Native;
 using Siege.ServiceLocator.Web;
 using Siege.ServiceLocator.Web.Conventions;
-using SessionWrapper = Siege.Repository.Web.SessionWrapper;
 
 namespace QA_Test_Tracker
 {
@@ -36,7 +32,7 @@ namespace QA_Test_Tracker
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new {controller = "Home", action = "Index", id = UrlParameter.Optional} // Parameter defaults
                 );
         }
 
@@ -46,15 +42,8 @@ namespace QA_Test_Tracker
             RegisterGlobalFilters(GlobalFilters.Filters);
 
             ServiceLocator
-                .Register(Given<HttpUnitOfWorkStore>.Then(new HttpUnitOfWorkStore(new SessionWrapper(() => HttpContext.Current.Session))))
                 .Register(Using.Convention<ControllerConvention<HomeController>>())
-                .Register(Using.Convention(new NHibernateConvention<HttpUnitOfWorkStore, TestTrackerDatabase>(TestTracker.SessionFactory)));
-
-        }
-
-        void Session_Start(object sender, EventArgs e)
-        {
-            Session["lol!"] = 1;
+                .Register(Using.Convention(new NHibernateConvention<ThreadedUnitOfWorkStore, TestTrackerDatabase>(TestTracker.SessionFactory)));
         }
     }
 }

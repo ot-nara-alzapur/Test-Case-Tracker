@@ -17,7 +17,6 @@ namespace QA_Test_Tracker.Controllers
 
         public ViewResult Index()
         {
-            Session["lol!"] = 1;
             return View(repository.Query<Product>().Find());
         }
 

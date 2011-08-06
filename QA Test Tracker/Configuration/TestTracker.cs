@@ -1,6 +1,7 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Tool.hbm2ddl;
 using QA_Test_Tracker.FluentConventions;
 using QA_Test_Tracker.FluentMappings;
 
@@ -43,19 +44,23 @@ namespace QA_Test_Tracker.Configuration
                         if (configuration == null)
                         {
                             configuration = Fluently.Configure()
-                                .Database(
-                                MsSqlConfiguration.MsSql2005
-                                    .ConnectionString(c => c.FromConnectionStringWithKey("TestTracker"))
-                                )
+                                .Database(SQLiteConfiguration.Standard.ConnectionString(c => c.FromConnectionStringWithKey("TestTracker")))
                                 .Mappings(m => m.FluentMappings
                                                 .AddFromAssemblyOf<TestPlanMap>()
-                                                .Conventions.AddFromAssemblyOf<ClassConvention>());
+                                                .Conventions.AddFromAssemblyOf<ClassConvention>())
+                                .ExposeConfiguration(BuildSchema);
                         }
                     }
                 }
 
                 return configuration;
             }
+        }
+
+        private static void BuildSchema(NHibernate.Cfg.Configuration cfg)
+        {
+            new SchemaExport(cfg)
+              .Create(false, true);
         }
     }
 }
