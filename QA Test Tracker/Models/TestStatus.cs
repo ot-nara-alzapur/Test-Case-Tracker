@@ -2,9 +2,9 @@
 {
     public enum TestStatus
     {
-        Pending,
-        Passed,
-        Failed,
-        Blocked
+        Pending = 1,
+        Passed = 2,
+        Failed =3,
+        Blocked = 4
     }
 }

@@ -2,10 +2,11 @@
 
 namespace QA_Test_Tracker.Models
 {
-    public class Product
+    public class Product : DomainObject
     {
-        public virtual int ID { get; set; }
-        [Required] public virtual string Name { get; set; }
+        [Required] 
+        public virtual string Name { get; set; }
+        [Required]
         public virtual string Description { get; set; }
     }
 }

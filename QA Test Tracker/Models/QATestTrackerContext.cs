@@ -18,5 +18,19 @@ namespace QA_Test_Tracker.Models
         // System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<QA_Test_Tracker.Models.QATestTrackerContext>());
 
         public DbSet<QA_Test_Tracker.Models.Product> Products { get; set; }
+
+        public DbSet<QA_Test_Tracker.Models.Release> Releases { get; set; }
+
+        public DbSet<QA_Test_Tracker.Models.Feature> Features { get; set; }
+
+        public DbSet<QA_Test_Tracker.Models.Build> Builds { get; set; }
+
+        public DbSet<QA_Test_Tracker.Models.TestPlan> TestPlans { get; set; }
+
+        public DbSet<QA_Test_Tracker.Models.TestCase> TestCases { get; set; }
+
+        public DbSet<QA_Test_Tracker.Models.TestStep> TestSteps { get; set; }
+
+        public DbSet<QA_Test_Tracker.Models.TestComponent> TestComponents { get; set; }
     }
 }

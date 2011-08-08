@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace QA_Test_Tracker.Models
 {
-    public class TestCase
+    public class TestCase : DomainObject
     {
-        public virtual int ID { get; set; }
+        [Required]
         public virtual TestComponent Component { get; set; }
         public virtual List<TestStep> Tests { get; set; }
     }

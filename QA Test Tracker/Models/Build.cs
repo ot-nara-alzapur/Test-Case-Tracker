@@ -1,9 +1,12 @@
-﻿namespace QA_Test_Tracker.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QA_Test_Tracker.Models
 {
-    public class Build
+    public class Build : DomainObject
     {
-        public virtual int ID { get; set; }
+        [Required]
         public virtual Product Product { get; set; }
+        [Required]
         public virtual string BuildNumber { get; set; }
     }
 }

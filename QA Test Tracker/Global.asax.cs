@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Routing;
-using NHibernate.Tool.hbm2ddl;
 using QA_Test_Tracker.Configuration;
 using QA_Test_Tracker.Controllers;
+using QA_Test_Tracker.Models;
+using Siege.Repository;
 using Siege.Repository.NHibernate;
 using Siege.Repository.UnitOfWork;
 using Siege.ServiceLocator;
@@ -43,7 +45,30 @@ namespace QA_Test_Tracker
 
             ServiceLocator
                 .Register(Using.Convention<ControllerConvention<HomeController>>())
-                .Register(Using.Convention(new NHibernateConvention<ThreadedUnitOfWorkStore, TestTrackerDatabase>(TestTracker.SessionFactory)));
+                .Register(Using.Convention(new NHibernateConvention<SingletonUnitOfWorkStore, TestTrackerDatabase>(TestTracker.SessionFactory)));
+
+            ModelBinders.Binders.Clear();
+            ModelBinders.Binders.DefaultBinder = new RepositoryModelBinder(ServiceLocator);
+        }
+    }
+
+    public class SingletonUnitOfWorkStore : IUnitOfWorkStore
+    {
+        private IUnitOfWork unitOfWork;
+
+        public void Dispose()
+        {
+            
+        }
+
+        public IUnitOfWork CurrentFor<TDatabase>() where TDatabase : IDatabase
+        {
+            return this.unitOfWork;
+        }
+
+        public void SetUnitOfWork<TDatabase>(IUnitOfWork unitOfWork) where TDatabase : IDatabase
+        {
+            this.unitOfWork = unitOfWork;
         }
     }
 }

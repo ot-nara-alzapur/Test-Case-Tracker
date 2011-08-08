@@ -11,7 +11,7 @@ namespace QA_Test_Tracker.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Admin()
         {
             return View();
         }

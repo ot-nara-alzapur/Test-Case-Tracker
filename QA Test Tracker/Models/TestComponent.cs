@@ -1,10 +1,14 @@
-﻿namespace QA_Test_Tracker.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QA_Test_Tracker.Models
 {
-    public class TestComponent
+    public class TestComponent : DomainObject
     {
-        public virtual int ID { get; set; }
+        [Required] 
         public virtual Product Product { get; set; }
+        [Required]
         public virtual string Name { get; set; }
+        [Required]
         public virtual string Description { get; set; }
     }
 }

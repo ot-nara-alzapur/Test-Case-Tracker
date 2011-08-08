@@ -16,6 +16,8 @@ namespace QA_Test_Tracker.FluentMappings
                 .Inverse();
             References(x => x.TestPlan)
                 .ForeignKey("FK_ActiveTestPlans_TestPlans");
+            References(x => x.Release)
+                .ForeignKey("FK_ActiveTestPlans_Releases");
             Map(x => x.RequestTicketNumber);
         }
     }

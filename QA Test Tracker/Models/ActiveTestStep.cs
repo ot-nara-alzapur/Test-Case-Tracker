@@ -1,9 +1,11 @@
-﻿namespace QA_Test_Tracker.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QA_Test_Tracker.Models
 {
-    public class ActiveTestStep
+    public class ActiveTestStep : DomainObject
     {
-        public virtual int ID { get; set; }
         public virtual TestStep Test { get; set; }
+        [Required]
         public virtual TestStatus Status { get; set; }
         public virtual string RequestTicketNumber { get; set; }
     }
