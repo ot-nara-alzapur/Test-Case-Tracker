@@ -1,30 +1,31 @@
 ﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using QA_Test_Tracker.Configuration;
-using Siege.Repository.NHibernate;
-using Siege.ServiceLocator;
-using Siege.ServiceLocator.Web;
+using Siege.Repository;
 
 namespace QA_Test_Tracker.Models
 {
-    public class RepositoryModelBinder : ServiceLocatorModelBinder
+    public class RepositoryModelBinder<T> : DefaultModelBinder where T : DomainObject
     {
-        private readonly IServiceLocator serviceLocator;
+        private readonly IRepository<TestTrackerDatabase> repository;
 
-        public RepositoryModelBinder(IServiceLocator serviceLocator) : base(serviceLocator)
+        public RepositoryModelBinder(IRepository<TestTrackerDatabase> repository)
         {
-            this.serviceLocator = serviceLocator;
+            this.repository = repository;
         }
 
-        protected override object CreateModel(System.Web.Mvc.ControllerContext controllerContext, System.Web.Mvc.ModelBindingContext bindingContext, Type modelType)
+        protected override object CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
         {
-            if (!typeof(DomainObject).IsAssignableFrom(modelType)) return base.CreateModel(controllerContext, bindingContext, modelType);
+            if (modelType != typeof (T)) return base.CreateModel(controllerContext, bindingContext, modelType);
 
-            var unitOfWorkManager = serviceLocator.GetInstance<NHibernateUnitOfWorkManager>();
+            var result = bindingContext.ValueProvider.GetValue(typeof(T).Name + ".ID");
+            if (result == null) bindingContext.ValueProvider.GetValue("ID");
+            if (result != null && Convert.ToInt32(result.AttemptedValue) != 0)
+            {
+                return repository.Query<T>(query => query.Where(x => x.ID == Convert.ToInt32(result.AttemptedValue))).FindFirstOrDefault();
+            }
 
-            var session = unitOfWorkManager.SessionFor<TestTrackerDatabase>();
-
-            var result = bindingContext.ValueProvider.GetValue("ID");
-            if (result != null && Convert.ToInt32(result.AttemptedValue) != 0) return session.Get(modelType, Convert.ToInt32(result.AttemptedValue));
             return base.CreateModel(controllerContext, bindingContext, modelType);
         }
     }

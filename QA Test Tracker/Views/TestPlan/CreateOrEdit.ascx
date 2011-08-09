@@ -14,6 +14,6 @@
     <%: Html.LabelFor(model => model.Feature) %>
 </div>
 <div class="editor-field">
-    <%: Html.DropDownListFor(model => model.Feature, new SelectList(((IRepositoryViewPage)this.Page).GetAll<Feature>())) %>
+    <%: Html.DropDownListFor(model => model.Feature, new SelectList(((IRepositoryViewPage)this.).GetAll<Feature>())) %>
     <%: Html.ValidationMessageFor(model => model.Feature) %>
 </div>

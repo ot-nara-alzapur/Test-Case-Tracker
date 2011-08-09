@@ -1,39 +1,53 @@
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<QA_Test_Tracker.Models.Build>>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<QA_Test_Tracker.Models.TestPlan>>" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Builds
+    Test Plans
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
- 
     <p>
         <%: Html.ActionLink("Create New", "Create") %>
     </p>
     <table>
         <tr>
             <th></th>
+
             <th>
-                Product
+                Feature
             </th>
+
             <th>
-                BuildNumber
+                Test Cases
             </th>
+
+            <th>
+                Name
+            </th>
+
         </tr>
-    
+
     <% foreach (var item in Model) { %>
         <tr>
+
             <td>
                 <%: Html.ActionLink("Edit", "Edit", new { id=item.ID }) %> |
                 <%: Html.ActionLink("Details", "Details", new { id=item.ID }) %> |
                 <%: Html.ActionLink("Delete", "Delete", new { id=item.ID }) %>
             </td>
+
             <td>
-    			<%: (item.Product == null ? "None" : item.Product.Name) %>
+			    <%: (item.Feature == null ? "None" : item.Feature.Name) %>
             </td>
+
             <td>
-    			<%: item.BuildNumber %>
+			    <%: (item.TestCases == null ? "None" : item.TestCases.Count.ToString()) %>
             </td>
+
+            <td>
+			    <%: item.Name %>
+            </td>
+
         </tr>  
     <% } %>
-    
+
     </table>
 </asp:Content>

@@ -6,7 +6,8 @@
 <asp:Content ContentPlaceHolderID="headContent" runat="server">
 <link rel="stylesheet" type="text/css" media="screen" href="<%: Url.Content("~/content/themes/ui.jqgrid.css") %>" />
 <link rel="stylesheet" type="text/css" media="screen" href="<%: Url.Content("~/content/themes/smoothness/jquery-ui-1.8.15.custom.css") %>" />
-<style>    .ui-jqgrid {font-size:0.8em}
+<style>
+    .ui-jqgrid {font-size:0.8em}
 </style>
 </asp:Content>
 
@@ -34,7 +35,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <div align=right><%: Html.ActionLink("Add Test Cases", "Create", "TestCases", new { testPlanID = Model.ID }, null) %></div>
+                        <div align=right><%: Html.ActionLink("Add Test Cases", "Create", "TestCase", new { testPlanID = Model.ID }, null) %></div>
                     </td>
                 </tr>
             </table>
@@ -48,7 +49,7 @@
     </p>
     <script language="javascript" type="text/javascript">
         jQuery("#list2").jqGrid({
-            url: '/TestCases/List/?testPlanID=' + <%: Model.ID %>,
+            url: '/TestCase/List/?testPlanID=' + <%: Model.ID %>,
             datatype: "json",
             colModel: [
    		        { name: 'ID', index: 'ID', label: 'ID', align:'center' },

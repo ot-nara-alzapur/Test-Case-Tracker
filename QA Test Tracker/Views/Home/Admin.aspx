@@ -7,14 +7,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <ul>
-        <li><%: Html.ActionLink("Releases", "Index", "Releases")%></li>
-        <li><%: Html.ActionLink("Features", "Index", "Features")%></li>
-        <li><%: Html.ActionLink("Products", "Index", "Products")%></li>
-        <li><%: Html.ActionLink("Builds", "Index", "Builds")%></li>
-        <li><%: Html.ActionLink("Test Plans", "Index", "TestPlans")%></li>
-        <li><%: Html.ActionLink("Test Cases", "Index", "TestCases")%></li>
-        <li><%: Html.ActionLink("Test Steps", "Index", "TestSteps")%></li>
-        <li><%: Html.ActionLink("Test Components", "Index", "TestComponents")%></li>
+        <li><%: Html.ActionLink("Releases", "Index", "Release")%></li>
+        <li><%: Html.ActionLink("Features", "Index", "Feature")%></li>
+        <li><%: Html.ActionLink("Products", "Index", "Product")%></li>
+        <li><%: Html.ActionLink("Builds", "Index", "Build")%></li>
+        <li><%: Html.ActionLink("Test Plans", "Index", "TestPlan")%></li>
+        <li><%: Html.ActionLink("Test Cases", "Index", "TestCase")%></li>
+        <li><%: Html.ActionLink("Test Steps", "Index", "TestStep")%></li>
+        <li><%: Html.ActionLink("Test Components", "Index", "TestComponent")%></li>
     </ul>
 
 </asp:Content>
