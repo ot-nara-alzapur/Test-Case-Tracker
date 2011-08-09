@@ -7,12 +7,19 @@
     <h3>Are you sure you want to delete this?</h3>
     <fieldset>
         <legend>TestPlan</legend>
-    
+
+
         <div class="display-label">Feature</div>
         <div class="display-field"><%: (Model.Feature == null ? "None" : Model.Feature.Name) %></div>
-    
+
+
         <div class="display-label">TestCases</div>
         <div class="display-field"><%: (Model.TestCases == null ? "None" : Model.TestCases.Count.ToString()) %></div>
+
+
+        <div class="display-label">Name</div>
+        <div class="display-field"><%: Model.Name %></div>
+
     </fieldset>
     <% using (Html.BeginForm()) { %>
         <p>
@@ -21,3 +28,5 @@
         </p>
     <% } %>
 </asp:Content>
+
+

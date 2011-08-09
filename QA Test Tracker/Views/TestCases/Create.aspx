@@ -4,20 +4,20 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
- 
     <% using (Html.BeginForm()) { %>
         <%: Html.ValidationSummary(true) %>
         <fieldset>
             <legend>TestCase</legend>
-    
-    		<%: Html.Partial("CreateOrEdit", Model) %>
+
+		    <%: Html.Partial("CreateOrEdit", Model) %>
             <p>
                 <input type="submit" value="Create" />
             </p>
         </fieldset>
     <% } %>
-    
+
     <div>
         <%: Html.ActionLink("Back to List", "Index") %>
     </div>
 </asp:Content>
+

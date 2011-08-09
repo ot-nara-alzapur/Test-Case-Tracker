@@ -1,12 +1,21 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace QA_Test_Tracker.Models
 {
     public class TestPlan : DomainObject
     {
-        [Required] 
+        public virtual string Name { get; set; }
         public virtual Feature Feature { get; set; }
-        public virtual List<TestCase> TestCases { get; set; }
+        public virtual IList<TestCase> TestCases { get; set; }
+
+        public TestPlan()
+        {
+            this.TestCases = new List<TestCase>();
+        }
+
+        public virtual void Add(TestCase testCase)
+        {
+            this.TestCases.Add(testCase);
+        }
     }
 }

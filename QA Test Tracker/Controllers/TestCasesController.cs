@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using QA_Test_Tracker.Configuration;
@@ -26,17 +28,45 @@ namespace QA_Test_Tracker.Controllers
             return View(testcase);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int? testPlanID)
         {
             return View();
-        } 
+        }
+
+        public JsonResult List(int? testPlanID)
+        {
+            int id = Convert.ToInt32(Request.QueryString["testPlanID"]);
+            if (id == 0) return Json(new {});
+            var testCases = repository.Query<TestPlan>(query => query.Where(x => x.ID == id)).FindFirstOrDefault().TestCases;
+            var results = new List<object>();
+
+            foreach(var testCase in testCases)
+            {
+                results.Add(new { id = testCase.ID, cell = new List<object> { testCase.ID, testCase.Name, testCase.Tests.Count } });
+            }
+            
+            var result = new
+            {
+                page = 1,
+                total = 1,
+                records = 1,
+                rows = results
+            };
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public ActionResult Create(TestCase testcase)
         {
             if (ModelState.IsValid)
             {
-                repository.Save(testcase);
+                int id = Convert.ToInt32(Request.QueryString["testPlanID"]);
+                var testPlan = repository.Query<TestPlan>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
+
+                testPlan.Add(testcase);
+
+                repository.Save(testPlan);
+
                 return RedirectToAction("Index");  
             }
 
@@ -46,6 +76,7 @@ namespace QA_Test_Tracker.Controllers
         public ActionResult Edit(int id)
         {
             var testcase = repository.Query<TestCase>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
+
             return View(testcase);
         }
 
@@ -57,11 +88,13 @@ namespace QA_Test_Tracker.Controllers
                 repository.Save(testcase);
                 return RedirectToAction("Index");
             }
+
             return View(testcase);
         }
 
         public ActionResult Delete(int id)
         {
+
             var testcase = repository.Query<TestCase>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
             return View(testcase);
         }

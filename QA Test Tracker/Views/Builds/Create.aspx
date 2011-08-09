@@ -5,12 +5,12 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
  
-        <% using (Html.BeginForm()) { %>
-        <%: Html.ValidationSummary(true) %>
+    <% using (Html.BeginForm()) { %>
+    <%: Html.ValidationSummary(true) %>
         <fieldset>
             <legend>Build</legend>
     
-    		<%: Html.Partial("CreateOrEdit", Model) %>
+    	    <%: Html.Partial("CreateOrEdit", Model) %>
             <p>
                 <input type="submit" value="Create" />
             </p>

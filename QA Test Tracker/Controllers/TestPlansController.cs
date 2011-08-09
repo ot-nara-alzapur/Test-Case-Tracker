@@ -46,6 +46,7 @@ namespace QA_Test_Tracker.Controllers
         public ActionResult Edit(int id)
         {
             var testplan = repository.Query<TestPlan>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
+
             return View(testplan);
         }
 
@@ -57,6 +58,7 @@ namespace QA_Test_Tracker.Controllers
                 repository.Save(testplan);
                 return RedirectToAction("Index");
             }
+
             return View(testplan);
         }
 
@@ -70,7 +72,7 @@ namespace QA_Test_Tracker.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             var testplan = repository.Query<TestPlan>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
-            repository.Save(testplan);
+            repository.Delete(testplan);
             return RedirectToAction("Index");
         }
     }

@@ -8,7 +8,7 @@ namespace QA_Test_Tracker.FluentMappings
         public TestPlanMap()
         {
             Id(x => x.ID);
-            Cache.ReadWrite();
+            Map(x => x.Name);
             References(x => x.Feature)
                 .ForeignKey("FK_TestPlans_Features");
             HasMany(x => x.TestCases)
