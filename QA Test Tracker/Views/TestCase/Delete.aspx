@@ -13,7 +13,7 @@
 
 
         <div class="display-label">Component</div>
-        <div class="display-field"><%: (Model.Component == null ? "None" : Model.Component.Name) %></div>
+        <div class="display-field"><%: (Model.TestComponent == null ? "None" : Model.TestComponent.Name)%></div>
 
 
         <div class="display-label">Tests</div>

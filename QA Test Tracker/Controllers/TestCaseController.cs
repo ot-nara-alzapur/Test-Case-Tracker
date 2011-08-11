@@ -24,8 +24,7 @@ namespace QA_Test_Tracker.Controllers
 
             foreach (var testCase in testCases)
             {
-                results.Add(
-                    new {id = testCase.ID, cell = new List<object> {testCase.ID, testCase.Name, testCase.Tests.Count}});
+                results.Add(new {id = testCase.ID, cell = new List<object> {testCase.ID, testCase.Name, testCase.Tests.Count}});
             }
 
             var result = new

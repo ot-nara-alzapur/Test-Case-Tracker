@@ -10,6 +10,7 @@ namespace QA_Test_Tracker.FluentMappings
             Id(x => x.ID);
             Map(x => x.Name);
             Map(x => x.Description);
+            References(x => x.TestCase).Cascade.None();
         }
     }
 }

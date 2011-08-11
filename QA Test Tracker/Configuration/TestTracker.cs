@@ -44,11 +44,13 @@ namespace QA_Test_Tracker.Configuration
                         if (configuration == null)
                         {
                             configuration = Fluently.Configure()
-                                .Database(SQLiteConfiguration.Standard.ConnectionString(c => c.FromConnectionStringWithKey("TestTracker")))
+                                .Database(
+                                    MsSqlConfiguration.MsSql2005.ConnectionString(
+                                        c => c.FromConnectionStringWithKey("TestTracker")))
                                 .Mappings(m => m.FluentMappings
-                                                .AddFromAssemblyOf<TestPlanMap>()
-                                                .Conventions.AddFromAssemblyOf<ClassConvention>())
-                                .ExposeConfiguration(BuildSchema);
+                                                   .AddFromAssemblyOf<TestPlanMap>()
+                                                   .Conventions.AddFromAssemblyOf<ClassConvention>());
+                            //.ExposeConfiguration(BuildSchema);
                         }
                     }
                 }
@@ -60,7 +62,8 @@ namespace QA_Test_Tracker.Configuration
         private static void BuildSchema(NHibernate.Cfg.Configuration cfg)
         {
             new SchemaExport(cfg)
-              .Create(false, true);
+                .SetOutputFile(@"c:\version1.sql")
+                .Execute(true, true, false);
         }
     }
 }

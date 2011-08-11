@@ -15,6 +15,7 @@ namespace QA_Test_Tracker.Models
 
         public virtual void Add(TestCase testCase)
         {
+            testCase.TestPlan = this;
             this.TestCases.Add(testCase);
         }
     }

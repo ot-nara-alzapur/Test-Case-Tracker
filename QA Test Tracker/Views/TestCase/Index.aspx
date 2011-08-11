@@ -39,7 +39,7 @@
             </td>
 
             <td>
-			    <%: (item.Component == null ? "None" : item.Component.Name) %>
+			    <%: (item.TestComponent == null ? "None" : item.TestComponent.Name)%>
             </td>
 
             <td>

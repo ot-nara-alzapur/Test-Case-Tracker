@@ -13,6 +13,7 @@ namespace QA_Test_Tracker.FluentMappings
                 .ForeignKey("FK_TestPlans_Features");
             HasMany(x => x.TestCases)
                 .ForeignKeyConstraintName("FK_TestCases_TestPlans")
+                .Cascade.All()
                 .Inverse();
         }
     }

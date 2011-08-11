@@ -8,5 +8,6 @@ namespace QA_Test_Tracker.Models
         public virtual string Name { get; set; }
         [Required]
         public virtual string Description { get; set; }
+        public virtual TestCase TestCase { get; set; }
     }
 }
