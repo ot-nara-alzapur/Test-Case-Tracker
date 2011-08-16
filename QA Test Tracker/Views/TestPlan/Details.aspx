@@ -4,11 +4,11 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="headContent" runat="server">
-<link rel="stylesheet" type="text/css" media="screen" href="<%: Url.Content("~/content/themes/ui.jqgrid.css") %>" />
-<link rel="stylesheet" type="text/css" media="screen" href="<%: Url.Content("~/content/themes/smoothness/jquery-ui-1.8.15.custom.css") %>" />
-<style>
-    .ui-jqgrid {font-size:0.8em}
-</style>
+    <link rel="stylesheet" type="text/css" media="screen" href="<%: Url.Content("~/content/themes/ui.jqgrid.css") %>" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<%: Url.Content("~/content/themes/smoothness/jquery-ui-1.8.15.custom.css") %>" />
+    <style>
+        .ui-jqgrid {font-size:0.8em}
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -26,7 +26,7 @@
 
         <div class="display-label">Test Cases:</div>
         <div class="display-field">
-            <table>
+            <table width="100%">
                 <tr>
                     <td>
                         <table id="list2"></table>
@@ -35,7 +35,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <div align=right><%: Html.ActionLink("Add Test Cases", "Create", "TestCase", new { testPlanID = Model.ID }, null) %></div>
+                        <div style="text-align:right"><%: Html.ActionLink("Add Test Cases", "Create", "TestCase", new { testPlanID = Model.ID }, null) %></div>
                     </td>
                 </tr>
             </table>
@@ -54,7 +54,8 @@
             colModel: [
    		        { name: 'ID', index: 'ID', label: 'ID', align:'center' },
    		        { name: 'Name', index: 'Name', label: 'Name', align:'center' },
-   		        { name: 'Count', index: 'Count', label: 'Count', align:'center' }
+   		        { name: 'Count', index: 'Count', label: 'Count', align:'center' },
+                { name: 'Edit', index: 'Edit', label: 'Actions', edittype:'select', formatter:EditLinkFormatter, align:'center', formatoptions:{baseLinkUrl: '/TestCase/Details/' } }
    	        ],
             rowNum: 10,
             rowList: [10, 20, 30],
@@ -62,9 +63,14 @@
             sortname: 'ID',
             viewrecords: true,
             sortorder: "asc",
-            width: "700"
+            autowidth:true
             });
         jQuery("#list2").jqGrid('navGrid', '#pager2', { edit: false, add: false, del: false });
+
+        function EditLinkFormatter(cellvalue, options, rowObject)
+        {
+            return '<a href=\'/TestCase/Details/' + rowObject[0] + '\'>Details</a>';
+        }
     </script>
 </asp:Content>
 

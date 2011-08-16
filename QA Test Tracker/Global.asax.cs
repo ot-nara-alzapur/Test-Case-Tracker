@@ -50,6 +50,8 @@ namespace QA_Test_Tracker
             ServiceLocator
                 .Register(Using.Convention<ControllerConvention<HomeController>>())
                 .Register(Given<GenericController<TestCase>>.Then<TestCaseController>())
+                .Register(Given<GenericController<TestStep>>.Then<TestStepController>())
+                .Register(Given<GenericController<Build>>.Then<BuildController>())
                 .Register(Using.Convention(new NHibernateConvention<SingletonUnitOfWorkStore, TestTrackerDatabase>(TestTracker.SessionFactory)));
 
             var repository = ServiceLocator.GetInstance<IRepository<TestTrackerDatabase>>();

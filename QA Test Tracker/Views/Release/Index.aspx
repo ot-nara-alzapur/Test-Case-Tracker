@@ -28,7 +28,7 @@
                 <%: Html.ActionLink("Delete", "Delete", new { id=item.ID }) %>
             </td>
             <td>
-    			<%: String.Format("{0:g}", item.ReleaseDate) %>
+    			<%: String.Format("{0:d}", item.ReleaseDate) %>
             </td>
             <td>
     			<%: item.ReleaseTicketNumber %>

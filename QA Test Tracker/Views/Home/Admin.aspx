@@ -7,13 +7,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <ul>
+        <li><%: Html.ActionLink("Test Plans", "Index", "TestPlan")%></li>
         <li><%: Html.ActionLink("Releases", "Index", "Release")%></li>
         <li><%: Html.ActionLink("Features", "Index", "Feature")%></li>
         <li><%: Html.ActionLink("Products", "Index", "Product")%></li>
         <li><%: Html.ActionLink("Builds", "Index", "Build")%></li>
-        <li><%: Html.ActionLink("Test Plans", "Index", "TestPlan")%></li>
-        <li><%: Html.ActionLink("Test Cases", "Index", "TestCase")%></li>
-        <li><%: Html.ActionLink("Test Steps", "Index", "TestStep")%></li>
         <li><%: Html.ActionLink("Test Components", "Index", "TestComponent")%></li>
     </ul>
 

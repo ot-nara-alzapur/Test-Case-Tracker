@@ -4,9 +4,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <p>
-        <%: Html.ActionLink("Create New", "Create") %>
-    </p>
     <table>
         <tr>
             <th></th>
@@ -48,6 +45,11 @@
 
         </tr>  
     <% } %>
-
+    <tr>
+        <td style="text-align:right" colspan="4">
+            <%: Html.ActionLink("Create New", "Create") %>
+        </td>
+    </tr>
     </table>
+    <br />
 </asp:Content>

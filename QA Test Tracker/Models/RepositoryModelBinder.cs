@@ -20,7 +20,7 @@ namespace QA_Test_Tracker.Models
             if (modelType != typeof (T)) return base.CreateModel(controllerContext, bindingContext, modelType);
 
             var result = bindingContext.ValueProvider.GetValue(typeof(T).Name + ".ID");
-            if (result == null) bindingContext.ValueProvider.GetValue("ID");
+            if (result == null) result = bindingContext.ValueProvider.GetValue("ID");
             if (result != null && Convert.ToInt32(result.AttemptedValue) != 0)
             {
                 return repository.Query<T>(query => query.Where(x => x.ID == Convert.ToInt32(result.AttemptedValue))).FindFirstOrDefault();

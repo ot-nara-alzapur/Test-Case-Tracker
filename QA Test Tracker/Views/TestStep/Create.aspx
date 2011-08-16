@@ -7,7 +7,7 @@
     <% using (Html.BeginForm()) { %>
         <%: Html.ValidationSummary(true) %>
         <fieldset>
-            <legend>TestStep</legend>
+            <legend>Test Step</legend>
     
     		<%: Html.Partial("CreateOrEdit", Model) %>
             <p>
@@ -17,6 +17,6 @@
     <% } %>
     
     <div>
-        <%: Html.ActionLink("Back to List", "Index") %>
+        <%: Html.ActionLink("Back to Test Case", "Details", "TestCase", new { id=Request.QueryString["testCaseID"] }, null) %>
     </div>
 </asp:Content>

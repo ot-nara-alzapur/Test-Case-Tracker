@@ -6,6 +6,7 @@ namespace QA_Test_Tracker.Models
     public class TestCase : DomainObject
     {
         [Required]
+        [DataType(DataType.MultilineText)]
         public virtual string Name { get; set; }
         public virtual TestPlan TestPlan { get; set; }
         public virtual TestComponent TestComponent { get; set; }

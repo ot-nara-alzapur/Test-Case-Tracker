@@ -18,7 +18,7 @@
                 <%: Html.ValidationMessageFor(model => model.Name) %>
             </div>
             <div class="editor-label">
-            <%: Html.LabelFor(model => model.TestComponent)%>
+            <%: Html.LabelFor(model => model.TestComponent)%> (<%: Html.ActionLink("Add", "Create", "TestComponent") %>)
             </div>
             <div class="editor-field">
                 <%: Html.DropDownListFor(model => model.TestComponent.ID, new SelectList(GetAll<TestComponent>(), "ID", "Name"))%>
@@ -31,6 +31,6 @@
     <% } %>
 
     <div>
-        <%: Html.ActionLink("Back to List", "Index") %>
+        <%: Html.ActionLink("Back to Test Plan", "Details", "TestPlan", new { id=Model.TestPlan.ID }, null) %>
     </div>
 </asp:Content>

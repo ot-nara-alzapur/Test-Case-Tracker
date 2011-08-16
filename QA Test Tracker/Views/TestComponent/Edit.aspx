@@ -9,9 +9,9 @@
     <% using (Html.BeginForm()) { %>
         <%: Html.ValidationSummary(true) %>
         <fieldset>
-            <legend>TestComponent</legend>
+            <legend>Test Component</legend>
     
-            <%: Html.HiddenFor(model => model.ID) %><
+            <%: Html.HiddenFor(model => model.ID) %>
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Name) %>
             </div>

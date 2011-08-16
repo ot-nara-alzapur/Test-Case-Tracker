@@ -54,5 +54,11 @@ namespace QA_Test_Tracker.Controllers
 
             return View(testCase);
         }
+
+        [HttpPost]
+        public ActionResult EditTestComponent(TestComponent component)
+        {
+            return RedirectToAction("Edit", "TestComponent", new {id = component.ID});
+        }
     }
 }

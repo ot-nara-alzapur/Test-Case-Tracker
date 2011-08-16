@@ -16,6 +16,7 @@
     <p>
     
         <%: Html.ActionLink("Edit", "Edit", new { id=Model.ID }) %> |
-        <%: Html.ActionLink("Back to List", "Index") %>
+        <%: Html.ActionLink("Back to Test Case", "Details", "TestCase", new { id=Model.TestCase.ID }, null) %> |
+        <%: Html.ActionLink("Back to Test Plan", "Details", "TestPlan", new { id=Model.TestCase.TestPlan.ID }, null) %>
     </p>
 </asp:Content>

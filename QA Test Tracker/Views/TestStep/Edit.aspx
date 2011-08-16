@@ -18,6 +18,6 @@
     <% } %>
     
     <div>
-        <%: Html.ActionLink("Back to List", "Index") %>
+        <%: Html.ActionLink("Back to Test Case", "Details", "TestCase", new { id=Model.TestCase.ID }, null) %>
     </div>
 </asp:Content>

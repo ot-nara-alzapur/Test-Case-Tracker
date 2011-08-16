@@ -9,7 +9,7 @@
     <% using (Html.BeginForm()) { %>
         <%: Html.ValidationSummary(true) %>
         <fieldset>
-            <legend>TestComponent</legend>
+            <legend>Test Component</legend>
             <div class="editor-label">
                 <%: Html.LabelFor(model => model.Name) %>
             </div>

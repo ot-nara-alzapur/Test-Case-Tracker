@@ -111,9 +111,11 @@
     <Compile Include="Configuration\TestTracker.cs" />
     <Compile Include="Configuration\TestTrackerDatabase.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BuildController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestCaseController.cs" />
+    <Compile Include="Controllers\TestStepController.cs" />
     <Compile Include="FluentMappings\ReleaseMap.cs" />
     <Compile Include="Models\ActiveTestCase.cs" />
     <Compile Include="Models\ActiveTestPlan.cs" />
@@ -122,7 +124,6 @@
     <Compile Include="Models\DomainObject.cs" />
     <Compile Include="Models\Feature.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\QATestTrackerContext.cs" />
     <Compile Include="Models\Release.cs" />
     <Compile Include="Models\RepositoryModelBinder.cs" />
     <Compile Include="Models\TestCase.cs" />

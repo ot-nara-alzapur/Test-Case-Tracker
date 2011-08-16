@@ -8,7 +8,7 @@
     <% using (Html.BeginForm()) { %>
         <%: Html.ValidationSummary(true) %>
         <fieldset>
-            <legend>TestCase</legend>
+            <legend>Test Case</legend>
                 <div class="editor-label">
                     <%: Html.LabelFor(model => model.Name) %>
                 </div>
@@ -17,7 +17,7 @@
                     <%: Html.ValidationMessageFor(model => model.Name) %>
                 </div>
                 <div class="editor-label">
-                <%: Html.LabelFor(model => model.TestComponent)%>
+                <%: Html.LabelFor(model => model.TestComponent) %> (<%: Html.ActionLink("Add", "Create", "TestComponent") %>)
                 </div>
                 <div class="editor-field">
                     <%: Html.DropDownListFor(model => model.TestComponent.ID, new SelectList(GetAll<TestComponent>(), "ID", "Name"))%>
@@ -30,7 +30,7 @@
     <% } %>
 
     <div>
-        <%: Html.ActionLink("Back to List", "Index") %>
+        <%: Html.ActionLink("Back to Test Plan", "Details", "TestPlan", new { id=Request.QueryString["testPlanID"] }, null) %>
     </div>
 </asp:Content>
 
