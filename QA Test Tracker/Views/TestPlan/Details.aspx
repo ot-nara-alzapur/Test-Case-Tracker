@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="<%: Url.Content("~/content/themes/smoothness/jquery-ui-1.8.15.custom.css") %>" />
     <style>
         .ui-jqgrid {font-size:0.8em}
+        .ui-jqgrid tr.jqgrow td { white-space:normal; }
     </style>
 </asp:Content>
 

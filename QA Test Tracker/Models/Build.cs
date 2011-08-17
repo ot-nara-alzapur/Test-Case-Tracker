@@ -8,6 +8,7 @@ namespace QA_Test_Tracker.Models
         public virtual string BuildNumber { get; set; }
         public virtual IList<ActiveTestPlan> TestPlans { get; set; }
         public virtual Release Release { get; set; }
+        public virtual BuildStatus Status { get; set; }
 
         public Build()
         {

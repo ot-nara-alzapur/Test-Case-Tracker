@@ -51,6 +51,8 @@ namespace QA_Test_Tracker
                 .Register(Using.Convention<ControllerConvention<HomeController>>())
                 .Register(Given<GenericController<TestCase>>.Then<TestCaseController>())
                 .Register(Given<GenericController<TestStep>>.Then<TestStepController>())
+                .Register(Given<GenericController<TestPlan>>.Then<TestPlanController>())
+                .Register(Given<GenericController<ActiveTestPlan>>.Then<ActiveTestPlanController>())
                 .Register(Given<GenericController<Build>>.Then<BuildController>())
                 .Register(Using.Convention(new NHibernateConvention<SingletonUnitOfWorkStore, TestTrackerDatabase>(TestTracker.SessionFactory)));
 

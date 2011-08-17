@@ -10,6 +10,7 @@ namespace QA_Test_Tracker.FluentMappings
             Id(x => x.ID);
             Map(x => x.RequestTicketNumber);
             Map(x => x.Status);
+            References(x => x.ActiveTestCase).Cascade.None();
             References(x => x.Test)
                 .ForeignKey("FK_ActiveTestSteps_TestSteps");
         }

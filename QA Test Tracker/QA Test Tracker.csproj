@@ -111,16 +111,19 @@
     <Compile Include="Configuration\TestTracker.cs" />
     <Compile Include="Configuration\TestTrackerDatabase.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActiveTestPlanController.cs" />
     <Compile Include="Controllers\BuildController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestCaseController.cs" />
+    <Compile Include="Controllers\TestPlanController.cs" />
     <Compile Include="Controllers\TestStepController.cs" />
     <Compile Include="FluentMappings\ReleaseMap.cs" />
     <Compile Include="Models\ActiveTestCase.cs" />
     <Compile Include="Models\ActiveTestPlan.cs" />
     <Compile Include="Models\ActiveTestStep.cs" />
     <Compile Include="Models\Build.cs" />
+    <Compile Include="Models\BuildStatus.cs" />
     <Compile Include="Models\DomainObject.cs" />
     <Compile Include="Models\Feature.cs" />
     <Compile Include="Models\Product.cs" />
@@ -309,6 +312,7 @@
     <Content Include="Views\TestComponent\Details.aspx" />
     <Content Include="Views\TestComponent\Edit.aspx" />
     <Content Include="Views\TestComponent\Index.aspx" />
+    <Content Include="Views\ActiveTestPlan\Create.aspx" />
     <Content Include="Views\TestPlan\Create.aspx" />
     <Content Include="Views\TestPlan\Delete.aspx" />
     <Content Include="Views\TestPlan\Details.aspx" />

@@ -9,9 +9,11 @@ namespace QA_Test_Tracker.FluentMappings
         {
             Id(x => x.ID);
             Map(x => x.BuildNumber);
-            References(x => x.Release);
+            Map(x => x.Status);
+            References(x => x.Release).Cascade.None();
             HasMany(x => x.TestPlans)
                 .ForeignKeyConstraintName("FK_Builds_ActiveTestPlans")
+                .Cascade.All()
                 .Inverse();
             References(x => x.Product)
                 .ForeignKey("FK_Builds_Products");

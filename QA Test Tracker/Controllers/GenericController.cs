@@ -15,18 +15,18 @@ namespace QA_Test_Tracker.Controllers
             this.repository = repository;
         }
 
-        public ViewResult Index()
+        public virtual ActionResult Index()
         {
             return View(repository.Query<TModel>().Find());
         }
 
-        public ViewResult Details(int id)
+        public virtual ActionResult Details(int id)
         {
             var item = repository.Query<TModel>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
             return View(item);
         }
 
-        public ActionResult Create(int? id)
+        public virtual ActionResult Create(int? id)
         {
             return View();
         }
@@ -43,8 +43,8 @@ namespace QA_Test_Tracker.Controllers
 
             return View(item);
         }
-        
-        public ActionResult Edit(int id)
+
+        public virtual ActionResult Edit(int id)
         {
             var item = repository.Query<TModel>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
 
@@ -52,7 +52,7 @@ namespace QA_Test_Tracker.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(TModel item)
+        public virtual ActionResult Edit(TModel item)
         {
             if (ModelState.IsValid)
             {
@@ -63,14 +63,14 @@ namespace QA_Test_Tracker.Controllers
             return View(item);
         }
 
-        public ActionResult Delete(int id)
+        public virtual ActionResult Delete(int id)
         {
             var item = repository.Query<TModel>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
             return View(item);
         }
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public virtual ActionResult DeleteConfirmed(int id)
         {
             var item = repository.Query<TModel>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
             repository.Delete(item);

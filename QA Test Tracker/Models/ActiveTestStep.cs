@@ -8,5 +8,6 @@ namespace QA_Test_Tracker.Models
         [Required]
         public virtual TestStatus Status { get; set; }
         public virtual string RequestTicketNumber { get; set; }
+        public virtual ActiveTestCase ActiveTestCase { get; set; }
     }
 }

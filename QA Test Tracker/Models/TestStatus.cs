@@ -7,6 +7,7 @@
         Passed = 2,
         Failed =3,
         Blocked = 4,
-        FalsePositive = 5
+        FalsePositive = 5,
+        Untested = 6
     }
 }

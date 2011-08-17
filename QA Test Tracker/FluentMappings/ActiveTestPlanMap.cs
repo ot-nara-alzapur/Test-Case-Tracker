@@ -8,12 +8,13 @@ namespace QA_Test_Tracker.FluentMappings
         public ActiveTestPlanMap()
         {
             Id(x => x.ID);
+            References(x => x.Build).Cascade.None();
             HasMany(x => x.TestCases)
+                .Cascade.All()
                 .ForeignKeyConstraintName("FK_ActiveTestCases_ActiveTestPlans")
                 .Inverse();
             References(x => x.TestPlan)
                 .ForeignKey("FK_ActiveTestPlans_TestPlans");
-            Map(x => x.RequestTicketNumber);
         }
     }
 }

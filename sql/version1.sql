@@ -1,26 +1,26 @@
 
-    if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_ActiveTestCases_TestCases]') AND parent_object_id = OBJECT_ID('ActiveTestCases'))
-alter table ActiveTestCases  drop constraint FK_ActiveTestCases_TestCases
-
-
     if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_ActiveTestCases_ActiveTestPlans]') AND parent_object_id = OBJECT_ID('ActiveTestCases'))
 alter table ActiveTestCases  drop constraint FK_ActiveTestCases_ActiveTestPlans
 
 
-    if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_ActiveTestPlans_TestPlans]') AND parent_object_id = OBJECT_ID('ActiveTestPlans'))
-alter table ActiveTestPlans  drop constraint FK_ActiveTestPlans_TestPlans
+    if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_ActiveTestCases_TestCases]') AND parent_object_id = OBJECT_ID('ActiveTestCases'))
+alter table ActiveTestCases  drop constraint FK_ActiveTestCases_TestCases
 
 
     if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_Builds_ActiveTestPlans]') AND parent_object_id = OBJECT_ID('ActiveTestPlans'))
 alter table ActiveTestPlans  drop constraint FK_Builds_ActiveTestPlans
 
 
-    if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_ActiveTestSteps_TestSteps]') AND parent_object_id = OBJECT_ID('ActiveTestSteps'))
-alter table ActiveTestSteps  drop constraint FK_ActiveTestSteps_TestSteps
+    if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_ActiveTestPlans_TestPlans]') AND parent_object_id = OBJECT_ID('ActiveTestPlans'))
+alter table ActiveTestPlans  drop constraint FK_ActiveTestPlans_TestPlans
 
 
     if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_ActiveTestSteps_ActiveTestCases]') AND parent_object_id = OBJECT_ID('ActiveTestSteps'))
 alter table ActiveTestSteps  drop constraint FK_ActiveTestSteps_ActiveTestCases
+
+
+    if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_ActiveTestSteps_TestSteps]') AND parent_object_id = OBJECT_ID('ActiveTestSteps'))
+alter table ActiveTestSteps  drop constraint FK_ActiveTestSteps_TestSteps
 
 
     if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FK_Releases_Builds]') AND parent_object_id = OBJECT_ID('Builds'))
@@ -75,16 +75,15 @@ alter table TestSteps  drop constraint FK_TestSteps_TestCases
 
     create table ActiveTestCases (
         ActiveTestCaseID INT IDENTITY NOT NULL,
-       TestCaseID INT null,
        ActiveTestPlanID INT null,
+       TestCaseID INT null,
        primary key (ActiveTestCaseID)
     )
 
     create table ActiveTestPlans (
         ActiveTestPlanID INT IDENTITY NOT NULL,
-       RequestTicketNumber NVARCHAR(255) null,
-       TestPlanID INT null,
        BuildID INT null,
+       TestPlanID INT null,
        primary key (ActiveTestPlanID)
     )
 
@@ -92,14 +91,15 @@ alter table TestSteps  drop constraint FK_TestSteps_TestCases
         ActiveTestStepID INT IDENTITY NOT NULL,
        RequestTicketNumber NVARCHAR(255) null,
        Status INT null,
-       TestID INT null,
        ActiveTestCaseID INT null,
+       TestID INT null,
        primary key (ActiveTestStepID)
     )
 
     create table Builds (
         BuildID INT IDENTITY NOT NULL,
        BuildNumber NVARCHAR(255) null,
+       Status INT null,
        ReleaseID INT null,
        ProductID INT null,
        primary key (BuildID)
@@ -158,34 +158,34 @@ alter table TestSteps  drop constraint FK_TestSteps_TestCases
     )
 
     alter table ActiveTestCases 
-        add constraint FK_ActiveTestCases_TestCases 
-        foreign key (TestCaseID) 
-        references TestCases
-
-    alter table ActiveTestCases 
         add constraint FK_ActiveTestCases_ActiveTestPlans 
         foreign key (ActiveTestPlanID) 
         references ActiveTestPlans
 
-    alter table ActiveTestPlans 
-        add constraint FK_ActiveTestPlans_TestPlans 
-        foreign key (TestPlanID) 
-        references TestPlans
+    alter table ActiveTestCases 
+        add constraint FK_ActiveTestCases_TestCases 
+        foreign key (TestCaseID) 
+        references TestCases
 
     alter table ActiveTestPlans 
         add constraint FK_Builds_ActiveTestPlans 
         foreign key (BuildID) 
         references Builds
 
-    alter table ActiveTestSteps 
-        add constraint FK_ActiveTestSteps_TestSteps 
-        foreign key (TestID) 
-        references TestSteps
+    alter table ActiveTestPlans 
+        add constraint FK_ActiveTestPlans_TestPlans 
+        foreign key (TestPlanID) 
+        references TestPlans
 
     alter table ActiveTestSteps 
         add constraint FK_ActiveTestSteps_ActiveTestCases 
         foreign key (ActiveTestCaseID) 
         references ActiveTestCases
+
+    alter table ActiveTestSteps 
+        add constraint FK_ActiveTestSteps_TestSteps 
+        foreign key (TestID) 
+        references TestSteps
 
     alter table Builds 
         add constraint FK_Releases_Builds 

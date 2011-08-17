@@ -51,7 +51,7 @@ namespace QA_Test_Tracker.Controllers
             {
                 int id = Convert.ToInt32(Request.QueryString["releaseID"]);
                 var release = repository.Query<Release>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
-
+                build.Status = BuildStatus.InProgress;
                 release.Add(build);
 
                 repository.Save(release);
@@ -60,6 +60,70 @@ namespace QA_Test_Tracker.Controllers
             }
 
             return View(build);
+        }
+
+        public ActionResult Clone(int id)
+        {
+            var build = repository.Query<Build>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
+            var newBuild = new Build {Product = build.Product, Release = build.Release};
+
+            foreach(var testPlan in build.TestPlans)
+            {
+                var newTestPlan = new ActiveTestPlan {Build = build};
+
+                foreach(var testCase in testPlan.TestCases)
+                {
+                    var newTestCase = new ActiveTestCase {ActiveTestPlan = newTestPlan, TestCase = testCase.TestCase};
+
+                    foreach(var test in testCase.Tests)
+                    {
+                        var newTest = new ActiveTestStep
+                        {
+                            ActiveTestCase = newTestCase,
+                            Status = TestStatus.Pending,
+                            Test = test.Test
+                        };
+
+                        if(test.Status == TestStatus.Pending)
+                        {
+                            test.Status = TestStatus.Untested;
+                        }
+
+                        newTestCase.Add(newTest);
+                    }
+
+                    newTestPlan.TestCases.Add(newTestCase);
+                }
+
+                newBuild.TestPlans.Add(newTestPlan);
+            }
+
+            build.Status = BuildStatus.Closed;
+            
+            repository.Transact(r =>
+            {
+                r.Save(newBuild);
+                r.Save(build);
+            });
+            
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Remove(int id)
+        {
+            int buildID = Convert.ToInt32(Request.QueryString["buildID"]);
+            var build = repository.Query<Build>(query => query.Where(x => x.ID == buildID)).FindFirstOrDefault();
+
+            var activeTestPlan = repository.Query<ActiveTestPlan>(query => query.Where(x => x.ID == id)).FindFirstOrDefault();
+
+            build.TestPlans.Remove(activeTestPlan);
+            
+            repository.Delete(activeTestPlan);
+            repository.Save(build);
+
+
+            return RedirectToAction("Details", new {id = buildID});
         }
     }
 }

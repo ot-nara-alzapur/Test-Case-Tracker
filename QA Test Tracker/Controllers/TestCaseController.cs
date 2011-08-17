@@ -18,8 +18,7 @@ namespace QA_Test_Tracker.Controllers
         {
             int id = Convert.ToInt32(Request.QueryString["testPlanID"]);
             if (id == 0) return Json(new {});
-            var testCases =
-                repository.Query<TestPlan>(query => query.Where(x => x.ID == id)).FindFirstOrDefault().TestCases;
+            var testCases = repository.Query<TestPlan>(query => query.Where(x => x.ID == id)).FindFirstOrDefault().TestCases;
             var results = new List<object>();
 
             foreach (var testCase in testCases)
